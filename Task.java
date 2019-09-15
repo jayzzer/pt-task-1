@@ -4,13 +4,12 @@
 */
 
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Task {
   public static void main(String[] args) {
     String inFile = "input.log";
-    List<String> lines = new ArrayList<String>();
+    // List<String> lines = new ArrayList<String>();
+    String text = "";
     String line = null;
 
     // Reading from file
@@ -22,7 +21,7 @@ public class Task {
         new BufferedReader(fileReader);
 
       while((line = bufferedReader.readLine()) != null) {
-        lines.add(line);
+        text = text.concat(line).concat("\n");
       }
 
       bufferedReader.close();
@@ -46,14 +45,11 @@ public class Task {
       BufferedWriter bufferedWriter =
         new BufferedWriter(fileWriter);
 
-      for (int i=0; i<lines.size(); i++) {
-        String result = lines.get(i)
-          .replaceAll(" 0 ", " null ")
-          .replaceAll(" 0,0 ", " null ");
+      String result = text
+        .replaceAll(" 0 ", " null ")
+        .replaceAll(" 0,0 ", " null ");
 
-        bufferedWriter.write(result);
-        bufferedWriter.newLine();
-      }
+      bufferedWriter.write(result);
     
       bufferedWriter.close();
     }
